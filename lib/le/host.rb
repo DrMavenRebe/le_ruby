@@ -9,14 +9,18 @@ module Le
     module InstanceMethods
       def formatter
         proc do |severity, datetime, _, msg|
-          format_message(msg, severity)
+          format_message(msg, severity, datetime)
         end
       end
 
-      def format_message(message_in, severity)
-        message_in = message_in.inspect unless message_in.is_a?(String)
-
-        "#{message_in.lstrip}"
+      def format_message(message_in, severity, datetime)
+        if message_in.is_a?(String)
+          "#{datetime} #{message_in.lstrip}"
+        elsif message_in.is_a?(Hash)
+          message_in.merge!({date_time: datetime, severity: severity}).to_json
+        else
+          "#{datetime} #{message_in.inspect}"
+        end
       end
     end
 
