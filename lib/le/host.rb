@@ -9,8 +9,7 @@ module Le
     module InstanceMethods
       def formatter
         proc do |severity, datetime, _, msg|
-          message = "#{datetime} "
-          message << format_message(msg, severity)
+          format_message(msg, severity)
         end
       end
 
