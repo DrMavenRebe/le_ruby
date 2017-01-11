@@ -17,7 +17,7 @@ module Le
         if message_in.is_a?(String)
           "#{datetime} #{message_in.lstrip}"
         elsif message_in.is_a?(Hash)
-          message_in.merge!({date_time: datetime, severity: severity}).to_json
+          message_in.merge({date_time: datetime, severity: severity}).to_json
         else
           "#{datetime} #{message_in.inspect}"
         end
